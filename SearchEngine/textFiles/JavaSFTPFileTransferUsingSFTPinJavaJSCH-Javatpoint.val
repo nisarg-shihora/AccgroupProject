@@ -1,0 +1,1618 @@
+https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-sftp Java SFTP | File Transfer Using SFTP in Java JSCH - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java SFTP | File Transfer Using SFTP in Java JSCH In digital word transferring file client to server and vice-versa is a typical process because the size of file may be large or may be un authorize access. So, it become necessary to protect the file and data from authorization. The SFTP ensures the security while transferring the file over the network. In this section, we will discuss how to transfer file from a remote server to the local system and vice versa using SSH File Transfer Protocol (SFTP) in Java. SFTP SFTP stands for SSH File Transfer Protocol. It has replaced the legacy FTP protocol. It runs over the SSH protocol. It supports the full security and authentication functionality of SSH. In couple of years, it will also take over the FTPS protocol. There is no dedicated SFTP port; SFTP uses the normal SSH port i.e. 22. Features of SFTP It protects against password sniffing. It avoids man-in-the-middle attack. Protects the integrity of data using encryption and cryptographic hash function. It authenticates both server and user. Many SSH clients support SFTP: Tectia SSH Client WinSCP FileZilla PuTTY Cyberduck SFTP Libraries for Java Developers JCraft JSch SSHJ Using JSch Library JSch library provides the get() and put() method to transfer file between server and client. The put() method is used to transfer files from a local system to a remote server. Add the jsch dependency to the pom.xml file. 
+  <dependency>
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.55</version>
+  </dependency>
+ It automatically downloads the jsch-0.1.55.jar file to the project directory. We use put() method to transfer files from a local host to the server. 
+channelSftp.put(localFile, remoteFile);
+ We use get() to download files from server to the local host. 
+channelSftp.get(remoteFile, localFile);
+ Authenticate Password 
+  JSch jsch = new JSch();
+  jsch.setKnownHosts("/home/mkyong/.ssh/known_hosts");
+  jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+  jschSession.setPassword(PASSWORD);
+ Public and private keys authentication use Public Key Authentication with SSH 
+Local private key: /home/javatpoint/.ssh/id_rsa
+Remote public key: ~/.ssh/authorized_keys
+ Let's see how to use keys in program. 
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/ javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+jsch.addIdentity("/home/ javatpoint/.ssh/id_rsa");
+ let's see the following JSch example to transfer a file from the local system to a remote server 1.2.3.4, authenticate using an SSH password. SFTPFileTransfer.java 
+import com.jcraft.jsch.*;
+public class SFTPFileTransfer 
+{
+private static final String REMOTE_HOST = "1.2.3.4";
+//variable for user name
+private static final String USERNAME = "";
+//variable for password
+private static final String PASSWORD = "";
+//port number for SFTP
+private static final int REMOTE_PORT = 22;
+private static final int SESSION_TIMEOUT = 10000;
+private static final int CHANNEL_TIMEOUT = 5000;
+public static void main(String args[]) 
+{
+String localFile = "/home/javatpoint/local/random.txt";
+String remoteFile = "/home/javatpoint/remote/afile.txt";
+Session jschSession = null;
+try 
+{
+JSch jsch = new JSch();
+jsch.setKnownHosts("/home/javatpoint/.ssh/known_hosts");
+jschSession = jsch.getSession(USERNAME, REMOTE_HOST, REMOTE_PORT);
+// authenticate using private key
+// jsch.addIdentity("/home/javatpoint/.ssh/id_rsa");
+// authenticate using password
+jschSession.setPassword(PASSWORD);
+// 10 seconds session timeout
+jschSession.connect(SESSION_TIMEOUT);
+Channel sftp = jschSession.openChannel("sftp");
+// 5 seconds timeout
+sftp.connect(CHANNEL_TIMEOUT);
+ChannelSftp channelSftp = (ChannelSftp) sftp;
+// transfer file from local to remote server
+channelSftp.put(localFile, remoteFile);
+// download file from remote server to local
+// channelSftp.get(remoteFile, localFile);
+channelSftp.exit();
+} 
+catch (JSchException | SftpException e) 
+{
+e.printStackTrace();
+} 
+finally 
+{
+if (jschSession != null) 
+{
+jschSession.disconnect();
+}
+}
+System.out.println("Done");
+}
+}
+ Output: Done
+ Note that the Jar file should be properly attached, else you will get error. Next TopicDisplay List of TimeZone with GMT and UTC in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.

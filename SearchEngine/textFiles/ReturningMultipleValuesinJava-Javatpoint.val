@@ -1,0 +1,2531 @@
+https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/returning-multiple-values-in-java Returning Multiple Values in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Returning Multiple Values in Java Java does not support multiple return values. However, sometimes it is required to return multiple values. For that, we can use the following solutions. Case 1: If all of the returned values are the same If all the values that have to be returned are the same, then we can use an array. For example, two numbers are given, and it is required to perform the addition, subtraction, multiplication and division on these numbers. In such a scenario, we can use an array. Observe the following program. FileName: ReturnMultipleValues.java 
+public class ReturnMultipleValues 
+{
+// a method that performs basic arithmetic 
+// operations (+, - , *, /) on number a and b
+public int[] performBasicArithOp(int a, int b)
+{
+int add = a + b;
+int substract = a - b;
+int multiply = a * b;
+int divide = a / b;
+int ans[] = new int[4];
+ans[0] = add;
+ans[1] = substract;
+ans[2] = multiply;
+ans[3] = divide;
+return ans;
+}
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues
+ReturnMultipleValues obj = new ReturnMultipleValues();
+// input 1
+int n1 = 6;
+int n2 = 3;
+int ans[] = obj.performBasicArithOp(n1, n2);
+System.out.println("The sum of numbers " + n1 + " and " + n2 + " is: " + ans[0]);
+System.out.println("The difference of numbers " + n1 + " and " + n2 + " is: " + ans[1]);
+System.out.println("The multiplication of numbers " + n1 + " and " + n2 + " is: " + ans[2]);
+System.out.println("The division of numbers " + n1 + " and " + n2 + " is: " + ans[3]);
+}
+}
+ Output: The sum of numbers 6 and 3 is: 9
+The difference of numbers 6 and 3 is: 3
+The multiplication of numbers 6 and 3 is: 18
+The division of numbers 6 and 3 is: 2
+ Complexity Analysis: Since the program is using a for-loop for computing the sum of elements, the time complexity of the program is O(n), where n is the total number of elements present in the array. The space complexity of the program is constant, i.e., O(1). Case 2: If we have to return two values of different types In case we have the two values of the different types, we can use Pair. FileName: ReturnMultipleValues1.java 
+// creating our own Pair Class
+class Pair<X, Y> 
+{
+    private final X k;
+    private final Y v;
+    public Pair(X k, Y v) 
+    {
+        this.k = k;
+        this.v = v;
+    }
+    public X retrieveKey() 
+    {
+        return this.k;
+    }
+    public Y retrieveVal() 
+    {
+        return this.v;
+    }
+}
+public class ReturnMultipleValues1
+{
+    // the foo() method returns two values and 
+    // that too of different types
+    public Pair<String, Integer> foo()
+    {
+        return new Pair<String, Integer>("JavaTpoint", 100);
+    }
+// main method
+public static void main(String[] argvs) 
+{
+// creating an object of the class ReturnMultipleValues1
+ReturnMultipleValues1 obj = new ReturnMultipleValues1();
+Pair<String, Integer> p = obj.foo();
+System.out.println(p.retrieveKey() + " " + p.retrieveVal());
+}
+}
+ Output: JavaTpoint 100
+ Case 3: If we have to return more values of different types In that case, we can use a class. Observe the following program. FileName: ArithmeticOperation.java 
+class ArithmeticOperation 
+{
+int m; // for storing multiplication
+double d; // for storing division
+int a; // for storing addition
+String s;
+// constructor of the class
+ArithmeticOperation(int mul, double div, int add, String str)
+{
+m = mul;
+d = div;
+a = add;
+s = str;
+}
+}
+public class ReturnMultipleValues2
+{
+public ArithmeticOperation getMultDivAdd(int n1, int n2)
+{
+// creating and returning object of ArithmeticOperation that contains multiple values
+return new ArithmeticOperation(n1 * n2, (double)n1 / n2, n1 + n2, "Performing Arithmetic Operation");
+}
+// main method
+public static void main(String[] argvs) 
+{
+int n1 = 29;
+int n2 = 20;
+// creating an object of the class ArithmeticOperation
+ArithmeticOperation obj = (new ReturnMultipleValues2()).getMultDivAdd(n1, n2);
+System.out.println("Statement: " + obj.s);
+System.out.println("The Multiplication of the numbers " + n1 + " and " + n2 + " is: " + obj.m);
+System.out.println("The Division of the numbers " + n1 + " and " + n2 + " is: " + obj.d);
+System.out.println("The Addition of the numbers " + n1 + " and " + n2 + " is: " + obj.a);
+}
+}
+ Output: Statement: Performing Arithmetic Operation
+The Multiplication of the numbers 29 and 20 is: 580
+The Division of the numbers 29 and 20 is: 1.45
+The Addition of the numbers 29 and 20 is: 49
+ Next TopicCentered Square Numbers in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.

@@ -23,18 +23,18 @@ public class WebCrawlerEvent {
 
 			 Elements urlsonwebpage = dc.select("a[href]");								// searchs urls with a tag of href attributes 
 			 
-			 String url;
+			 String url123;
 			 for (Element page : urlsonwebpage) {
-				 url = page.attr("abs:href");								// obtain an ultimate URL from an attribute that related to URL
-				 if(urls.contains(url)) {
-					 System.out.println("\nURL: " + url + " =====> url is already visited");			// example : https://www.javatpoint.com/python-tutorial
+				 url123 = page.attr("abs:href");								// obtain an ultimate URL from an attribute that related to URL
+				 if(urls.contains(url123)) {
+					 System.out.println("\nURL: " + url123 + " =====> url is already visited");			// example : https://www.javatpoint.com/python-tutorial
 				 } 
-				 else if(!Pattern.matches(urlp, url)) {
-					 System.out.println("\nURL: " + url + " =====> is irrevant. Will not be parsed."); // example : https://www.javatpoint.com/python-literals
+				 else if(!Pattern.matches(urlp, url123)) {
+					 System.out.println("\nURL: " + url123 + " =====> is irrevant. Will not be parsed."); // example : https://www.javatpoint.com/python-literals
 				 }
 				 else {
 					 urls.add(page.attr("abs:href"));
-					 System.out.println("\nURL: " + url + " =====>  web page will be crawled.");		//https://www.facebook.com/sharer.php?u=https://www.javatpoint.com/java-tutorial
+					 System.out.println("\nURL: " + url123 + " =====>  web page will be crawled.");		//https://www.facebook.com/sharer.php?u=https://www.javatpoint.com/java-tutorial
 				 }
 			}
 		}
@@ -47,18 +47,18 @@ public class WebCrawlerEvent {
 	public static void convertHtmlToText()
 	{
 		try {
-			String value, url;
+			String value, url123;
 			String path = System.getProperty("user.dir") + "\\textFiles\\";
 			Iterator<String> iterator = urls.iterator();
 			while(iterator.hasNext())
 			{
-				url = iterator.next();
-				Document dc = Jsoup.connect(url).get();
+				url123 = iterator.next();
+				Document dc = Jsoup.connect(url123).get();
 				value = dc.text();
 				String name = dc.title().replaceAll("[^a-zA-Z0-9_-]", "")+".val";
 				BufferedWriter buffferwriter = new BufferedWriter( 
 		        new FileWriter(path + name, true)); 
-		        buffferwriter.write(url + " " + value); 
+		        buffferwriter.write(url123 + " " + value); 
 		        buffferwriter.close(); 
 			}
 		}

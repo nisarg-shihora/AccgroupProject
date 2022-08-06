@@ -20,14 +20,14 @@ public class MergeSortAlgorithm {
 	      
 	       Collections.reverse(listarray);
 	       if(rep!=0) {
-		       System.out.println("\n ========================= Web Pages RANKED ========================= \n");
+		       System.out.println("\n ========================= Web Pages Ranked ========================= \n");
 		       
 		       int i = 10;
-		       int j = 1;
+		       int j = 0;
 		       System.out.printf( "%-10s %s\n", "Sr.no", "Name and repetition" );
 		       System.out.println("====================================================");
 				while (listarray.size() > j && i>0){
-					System.out.printf("\n%-10d| %s\n", j, listarray.get(j));
+					System.out.printf("\n%-10d| %s\n", j+1, listarray.get(j));
 					j++;
 					i--;
 				}

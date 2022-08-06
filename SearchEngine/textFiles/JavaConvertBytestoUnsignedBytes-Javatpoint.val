@@ -1,0 +1,1105 @@
+https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/java-convert-bytes-to-unsigned-bytes Java Convert Bytes to Unsigned Bytes - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev Java Convert Bytes to Unsigned Bytes In Java, byte is data type. It is 8-bit signed (+ ive or - ive) values from -128 to 127. The range of unsigned byte is 0 to 255. Note that Java does not provide unsigned byte. If we need to represent a number as unsigned byte, we must cast byte to int and mask (&) the new int with a &0xff. It gives the last 8-bits or prevents sign extension. Example: byte b = -1; int num = b &0xff //converts byte to unsigned byte in an integer Why we need casting (byte to int)? When we need to represent signed numbers in Java, we find 2's complement. In 2's complements the left most bit represent the sign (+ ive or - ive). The bit 0 denotes positive and 1 denotes negative. The rest of the bits denotes the value from -128 to 127. Therefore, it is called 8-bit byte only have 7 bits to store the values. other extra values range from 128 to 255 are unable to fit into a single byte. So, we can cast it to 32-bit unsigned integer for more spaces (bits). Byte to Unsigned Byte The following table depicts the conversion of byte to unsigned byte (int). Byte Unsigned Byte 1 1 2 2 127 127 -128 128 -127 129 -126 130 -2 254 -1 255 Conversion Process First, we cast the byte 8-bit into 32-bit. For example, convert -1. Find binary signed 2's complement of -1 by using the following steps: Write binary of 1, i.e. 0000 0001 Invert bits of the binary, i.e. 1111 1110. Add 1 to the inverted bits, i.e. 1111 1111 Hence, we get the binary of -1 i.e. 1111 1111. Where leftmost bit 1 represent negative sign while 0 represent the positive sign. Note that when we convert or cast a byte to an int, it increases the bits from 8 to 32 bit. The sign extension will apply and fill in the values of the increased bits. 8-bit representation 1111 1111 (-1) Converting byte into int 
+???? ???? | ???? ???? | ???? ???? | 1111 1111
+ 32-bit representation sign extension 
+1111 1111 | 1111 1111 | 1111 1111 | 1111 1111
+ Now we will get the last 8-bits by performing the &x0ff (bitwise AND). At last, convert binary to decimal. 1111 1111 128+64+32+16+8+4+2+1=255 Therefore -1 is 255. Using Java 8 Byte.toUnsignedInt() Method Java 8 provides the built-in method toUnsignedInt() that is defined in the Byte class. It supports unsigned operations. The method converts a signed byte into an unsigned integer. In an unsigned conversion, the high-order 24 bits of the int are zero and the low-order 8 bits are equal to the bits of the byte argument. Consequently, zero and positive byte values are mapped to a numerically equal int value and negative byte values are mapped to an int value equal to the input plus 28. Syntax: 
+public static int toUnsignedInt(byte x)
+ The method accepts a value to convert to an unsigned int. It returns the argument converted to int by an unsigned conversion. BytetoUnsignedByte1.java 
+public class BytetoUnsignedByte1
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -8;                              //-8 (signed) and 248(unsigned)
+System.out.println(b);                           //-8
+System.out.println(Byte.toUnsignedInt(b));       //248
+}
+}
+ Output: -8
+248
+ Let's see another approach to convert byte to an unsigned integer. BytetoUnsignedByte2.java 
+import java.lang.Number;  
+public class Byte 
+{
+public static void main(String args[])    
+{
+byte b= (byte) -12;        
+System.out.print(toUnsignedInt(b));
+}
+public static int toUnsignedInt(byte x) 
+{
+return ((int) x) & 0xff;
+}
+}
+ Output: 244
+ The above program can also be written as follows. BytetoUnsignedByte3.java 
+public class BytetoUnsignedByte3
+{
+public static void main(String args[]) 
+{
+byte b = (byte) -5; // -5 (signed) and 251 (unsigned)
+//-5 = 1111111111111011, two's complement
+System.out.println("Given Number: " + b);
+int b2= (int) b;
+int res = b2 & 0xff;
+System.out.println(res); //251
+}
+}
+ Output: Given Number: -5
+251
+ Next TopicJava SFTP | File Transfer Using SFTP in Java JSCH ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.

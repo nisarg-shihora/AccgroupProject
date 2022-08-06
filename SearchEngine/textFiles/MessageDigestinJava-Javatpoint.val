@@ -1,0 +1,1429 @@
+https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next Topic# ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next Topic# ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next Topic# ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/messagedigest-in-java MessageDigest in Java - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev MessageDigest in Java MessageDigest is the returned value of the hash function, which is also known as has values. Hash functions are mostly used in each and every information security application. Hash functions are used for converting numerical values into compressed numerical values. For Hash functions, the length of the user-given input can be arbitrary, but the length of the output is always of fixed length. The java.security package provides a class, i.e., MessageDigest, that supports algorithms such as SHA-1, SHA 256, and MD5 etc., for converting a message of arbitrary length to a message digest. In order to convert a message into MessageDigest, we use the following steps: 1. In the first step, we will create an instance of the MessageDigest by using the getInstance() method of the MessageDigest The getInstance() method accepts a parameter, i.e., algo, which defines the algorithm to be used. The getInstance() method returns a MessageDigest object implementing the specified algorithm. 
+MessageDigest obj = MessageDigest.getInstance("SHA-1");
+ 2. In the next step, we will pass the message to the created MessageDigest instance. For passing the value, we use the update() method of the MessageDigest class. The update() method accepts data in the form of the byte array. 
+obj.update(msg.getBytes())
+ 3. In the next step, we will use the digest() method of the MessageDigest class to generate the message digest. The digest() method is responsible for computing the hash function on the current object. The digest() method returns the message digest in the form of the byte array. 
+byte[] digest = obj.digest();
+ Let's implement the code for understanding how we can use the MessageDigest class by using the above steps: MessageDigestExample.java 
+// import required classes and package if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+// create class MessageDigestExample to understand the use of MessageDigest class
+public class MessageDigestExample {
+	// main() method start
+	public static void main(String args[]) throws Exception{
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		//create an instance of the MessageDigest by using the getInstance() method with the SHA-256 algorithm
+		MessageDigest obj = MessageDigest.getInstance("SHA-256");
+	//use update() method for passing data to the created MessageDigest Object
+		obj.update(msg.getBytes());
+		//use the digest() method for computing the message digest
+		byte[] byteArray = obj.digest();
+		System.out.println(byteArray);  
+		//convert the byte array in to Hex String format
+		StringBuffer hexData = new StringBuffer();
+		for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+		}
+		System.out.println("Data in Hex format : " + hexData.toString());     
+	}
+}
+ Output: The getInstance() method of the MessageDigest class can throw the NoSuchAlgorithmException when no provider supports the message digest spi application for the particular algorithm. MessageDigestExceptionExample.java 
+//import required classes and package, if any
+import java.security.MessageDigest;
+import java.util.Scanner;
+//create class MessageDigestExceptionExample to understand how getInstance() throw an exception 
+public class MessageDigestExceptionExample {
+	// main() method start
+	public static void main(String args[]){
+		// create an instance of Scanner class
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the message of any arbitrary length:");
+		String msg = sc.nextLine();
+		// close Scanner class
+		sc.close();
+		try {
+			//create an instance of the MessageDigest by using the getInstance() method with the JTP algorithm
+			MessageDigest obj = MessageDigest.getInstance("JTP");	//throw an error
+//use update() method for passing data to the created MessageDigest Object
+			obj.update(msg.getBytes());
+			//use the digest() method for computing the message digest
+			byte[] byteArray = obj.digest();
+			System.out.println(byteArray);  
+			//convert the byte array in to Hex String format
+			StringBuffer hexData = new StringBuffer();
+			for (int i = 0; i < byteArray.length; i++) {
+			hexData.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
+			System.out.println("Data in Hex format : " + hexData.toString()); 
+		}catch(Exception e) {
+			System.out.println(e);
+		}    
+	}
+}
+ Output: Next TopicAlphabet Pattern in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.

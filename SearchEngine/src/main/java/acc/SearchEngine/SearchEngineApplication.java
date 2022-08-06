@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
 
+import com.searchengine.WebSearchEngine.WebSearchEngine;
+
 import acc.SearchEngine.Algorithms.BoyerMooreAlgorithm;
 import acc.SearchEngine.Algorithms.BoyerMooreSearchWords;
 import acc.SearchEngine.Algorithms.MergeSortAlgorithm;
@@ -29,7 +31,7 @@ public class SearchEngineApplication {
 
 	public static void searchEngine() {
 		System.out.println("\n ========================= Crawler started ========================= ");
-		String url = "https://www.javatpoint.com/python-tutorial";
+		String url = "https://www.javatpoint.com/";
 		WebCrawlerEvent.startCrawl(url);
 		System.out.println("\n ========================= Crawler Stopped ========================= ");
 		

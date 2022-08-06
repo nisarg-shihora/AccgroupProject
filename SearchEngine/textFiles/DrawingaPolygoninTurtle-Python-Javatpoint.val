@@ -1,0 +1,837 @@
+https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/drawing-a-polygon-in-turtle-python Drawing a Polygon in Turtle - Python - Javatpoint ? SCROLL TO TOP Home Python Turtle Python Openpyxl Pygame Java SQL Android Cloud JavaScript Servlet HTML Struts2 Spring Quiz Interview Q Comment Forum Python Turtle Programming Python Turtle Tutorial Drawing a Square and a Rectangle in Turtle - Python Drawing a Polygon in Turtle - Python Drawing Colour Filled Shapes in Turtle - Python Drawing Y Fractal tree in Turtle - Python next ? ? prev Drawing a Polygon in Turtle - Python Python contains a module called Turtle. It allows us to sketch any drawing using a turtle, techniques from the turtle module, and logical loops. Basically, turtle drawings are created using one of four techniques listed in the turtle module. forward(p) : The turtle (pen) is moved forward by an amount equal to p. reverse(p) : shifts the turtle's (pen's) position backward by an amount equal to p. right(q) : clockwise rotate the turtle (pen) by q degrees. left(q) : Rotate the turtle (pen) by q degrees counterclockwise by pressing the left(q) We will talk about drawing polygons in Turtle in this article. Turtle is essentially a Python built-in module. Turtle allows us to draw a variety of shapes. Tkinter is mostly used for the visuals. Tkinter is therefore required in addition to Python. Therefore, then this would throw an error if you don't have Tkinter - 
+ModuleNotFoundError: No module named 'tkinter'
+ If IDLE (Integrated Development and Learning Environment) is already installed. Tkinter is then already set up. But if it's not, then adhere to the guidelines below. Note : To do the following operations, you must be a superuser. In the absence of one, we suggest contacting your system administrator. 
+sudo apt update
+ Given that the software is accessible via the default Ubuntu repository. So, upgrading the repository is beneficial. After that, install Tkinter. 
+sudo apt install python3-tk
+ Polygon in Turtle - Python : This lesson will teach us how to use a turtle in Python turtle library to draw a polygon. We should know a little bit about polygons before continuing. A polygon is a type of geometric figure that has two dimensions. It has a definite number of sides which are joined together to form a polygonal shape. Because the triangle is a plane figure, we named it a polygon. Similar to the triangle, the circle does have a plane figure, but we don't refer to it as a polygon since it is curved and lacks sides. When everything is ready, we move on to the idea we'll use to use Turtle to create a polygon of any shape. We must first determine a polygon's outer angle. If we are aware of the polygon's number of sides, finding this is rather simple. Exterior angle of a polygon = 360/number of sides. Using an illustration, comprehend it : The exterior angle of a square is equal to 360/4 if the number of sides is 4 (i.e., a square). Therefore, a square's outer angle is 90 degrees. Moreover, all we have to do in this situation is ask a user for the total number of sides. To determine a polygon's external angle, divide the total sides by 360 degrees. To draw the necessary form, utilize the for loop, forward(), and right() functions from the Turtle module. So lets get started. 
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+ This piece of python code is used in order to import the turtle library into our python program. 
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+ Here, the user will have to input the "side" and "lngth". Where, side is the parameter for the polygon's number of sides and lngth is the measure of each side of Polygon. These values are necessary for drawing the Polygon. 
+for j in range(side):
+tr.forward(lngth)
+tr.right(360/side)
+ Here, we used a for loop, for drawing the Polygon based on the values provided by the user. The for loop causes a certain set of instructions to run "side" times. tr.forward(lngth) moves the turtle "lngth" pixels forward and draws them in the direction it is facing. It then turns in position by 360/side degrees by calling tr.right(360/side). For instance, it would rotate 90 degrees for a square. Hence, results in the Polygon being drawn. Complete Code : 
+# Drawing a Polygon in turtle - Python
+
+from turtle import * 
+import turtle as turt
+
+tr = turt.Turtle()
+
+# Total No. of sides of the polygon to be drawn
+side = int(input("The number of sides the Polygon should have is : "))
+
+# Total Length of each side of the polygon to be drawn
+lngth = int(input("The length of each side the Polygon should have is : "))
+
+for j in range(side):
+  tr.forward(lngth)
+  tr.right(360/side)
+ Output: The number of sides the Polygon should have is :  3
+The length of each side the Polygon should have is :  60
+ Output: For 5 sides- The number of sides the Polygon should have is :  5
+The length of each side the Polygon should have is :  70
+ Output: For 8 sides The number of sides the Polygon should have is :  8
+The length of each side the Polygon should have is :  60
+ Next TopicDrawing Colour Filled Shapes in Turtle - Python ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.

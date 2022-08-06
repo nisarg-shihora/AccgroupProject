@@ -1,0 +1,1635 @@
+https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.https://www.javatpoint.com/how-to-split-a-string-between-numbers-and-letters How to Split a String between Numbers and Letters - Javatpoint ? SCROLL TO TOP Home Java Programs OOPs String Exception Multithreading Collections JavaFX JSP Spring Spring Boot Projects Interview Questions Java Tutorial What is Java History of Java Features of Java C++ vs Java Hello Java Program Program Internal How to set path? JDK, JRE and JVM JVM: Java Virtual Machine Java Variables Java Data Types Unicode System Operators Keywords Control Statements Java Control Statements Java If-else Java Switch Java For Loop Java While Loop Java Do While Loop Java Break Java Continue Java Comments Java Programs Java Object Class Java OOPs Concepts Naming Convention Object and Class Method Constructor static keyword this keyword Java Inheritance Inheritance(IS-A) Aggregation(HAS-A) Java Polymorphism Method Overloading Method Overriding Covariant Return Type super keyword Instance Initializer block final keyword Runtime Polymorphism Dynamic Binding instanceof operator Java Abstraction Abstract class Interface Abstract vs Interface Java Encapsulation Package Access Modifiers Encapsulation Java Array Java Array Java OOPs Misc Object class Object Cloning Math class Wrapper Class Java Recursion Call By Value strictfp keyword javadoc tool Command Line Arg Object vs Class Overloading vs Overriding Java String Java Regex Exception Handling Java Inner classes Java Multithreading Java I/O Java Networking Java AWT & Events Java Swing JavaFX Java Applet Java Reflection Java Date Java Conversion Java Collection Java JDBC Java Misc Java New Features RMI Internationalization Interview Questions Java MCQ next ? ? prev How to Split a String between Numbers and Letters? Problem Formulation: A list of letters and digits is provided. How to split up the string using the border between a letter and a number, and inversely, into substrings of either letters or numbers. Split string without a predefined function Divide the string str into three segments: a numeric segment; an alphabetic segment; and a segment with special characters. Examples 
+1) Input : Java234T678point78!!!!
+Output :JavaTpoint
+        23467878
+        !!!!
+Here str = "Java567T123point!!!", Every character is scanned, and the string's res1, res2, and res3 are appended appropriately.
+ 
+2) Input : **Java345T78point9##
+Output: JavaTpoint
+        345789
+        **##
+ Steps Determine the string's length. Individually scan each character (ch) in a string Add it to the res1 string if (ch is a digit). Alternately, if (ch is an alphabet), add a string to res2. Else add it in string res3. Print every string. We shall have three strings: one with a numeric component, one without a numeric component, and one with special characters.. Program 
+// java program to split an alphanumeric
+// string using Stringbuffer
+class check
+{
+static void splitString(String str)
+    {
+StringBuffer alpha = new StringBuffer(), 
+        num = new StringBuffer(), special = new StringBuffer();
+        for (int i=0; i<str.length(); i++)
+{
+            if (Character.isDigit(str.charAt(i)))
+                num.append(str.charAt(i));
+else if(Character.isAlphabetic(str.charAt(i)))
+                alpha.append(str.charAt(i));
+else
+                special.append(str.charAt(i));
+        }
+System.out.println(alpha);
+System.out.println(num);
+System.out.println(special);
+ }
+ // Driver method
+public static void main(String args[])
+    {
+String str = "Java234T567point890@#!!";
+splitString(str);
+}
+}
+ Output: Time Complexity: The preceding approach has an O(n) time complexity, where n is the length of the string. Auxiliary Space: The space complexity of give code is O(n), where n is the string's length. We can also split string on a regular expression like (?<=\D)(?=\d). Like this: Program 
+public class JavaTpoint{
+     public static void main(String []args){
+     String str = "Javatpoint12345";
+String[] part = str.split("(?<=\\D)(?=\\d)");
+System.out.println(part[0]);
+System.out.println(part[1]);
+     }
+}
+ Output: So there are many ways to split string between number and characters. That are following: Method: 1 
+public class JavaTpoint{
+     public static void main(String []args){
+    String st = "JavaTpoint123456789";
+String st1=st.replaceAll("[^A-Za-z]", "");
+String st2=st.replaceAll("[^0-9]", "");
+System.out.println("String b = "+st1);
+System.out.println("Int c = "+st2);
+     }
+}
+ Output: Method: 2 
+public class JavaTpoint{
+     public static void main(String []args){
+ String input_string = "JavaTpoint98765";
+String string_output=input_string.replaceAll("[^A-Za-z]", "");
+int number_output=Integer.parseInt(input_string.replaceAll("[^0-9]", ""));
+System.out.println("string_output = "+string_output);
+System.out.println("number_output = "+number_output);
+     }
+}
+ Output: Method: 3 
+public class MyClass {
+public static void main(String args[]) {
+  String a = "java123point456";
+    int i;
+    String str1="";
+    String str2="";
+    for(i = 0; i < a.length(); i++){
+             char c = a.charAt(i);
+                if( '0' <= c && c <= '9' )
+                         str1=str1+c;
+                if( 'a' <= c && c <= 'z' )
+                         str2=str2+c;
+       }
+   System.out.println(str1);
+   System.out.println(str2);
+   }}
+ Output: Next TopicString Handling in Java ? prev next ? For Videos Join Our Youtube Channel: Join Now Feedback Send your Feedback to [email protected] Help Others, Please Share Learn Latest Tutorials Splunk SPSS Swagger Transact-SQL Tumblr ReactJS Regex Reinforcement Learning R Programming RxJS React Native Python Design Patterns Python Pillow Python Turtle Keras Preparation Aptitude Reasoning Verbal Ability Interview Questions Company Questions Trending Technologies Artificial Intelligence AWS Selenium Cloud Computing Hadoop ReactJS Data Science Angular 7 Blockchain Git Machine Learning DevOps B.Tech / MCA DBMS Data Structures DAA Operating System Computer Network Compiler Design Computer Organization Discrete Mathematics Ethical Hacking Computer Graphics Software Engineering Web Technology Cyber Security Automata C Programming C++ Java .Net Python Programs Control System Data Mining Data Warehouse Javatpoint Services JavaTpoint offers too many high quality services. Mail us on [email protected], to get more information about given services. Website Designing Website Development Java Development PHP Development WordPress Graphic Designing Logo Digital Marketing On Page and Off Page SEO PPC Content Development Corporate Training Classroom and Online Training Data Entry Training For College Campus JavaTpoint offers college campus training on Core Java, Advance Java, .Net, Android, Hadoop, PHP, Web Technology and Python. Please mail your requirement at [email protected] Duration: 1 week to 2 week Like/Subscribe us for latest updates or newsletter Learn TutorialsLearn JavaLearn Data StructuresLearn C ProgrammingLearn C++ TutorialLearn C# TutorialLearn PHP TutorialLearn HTML TutorialLearn JavaScript TutorialLearn jQuery TutorialLearn Spring Tutorial Our WebsitesJavatpoint.comHindi100.comLyricsia.comQuoteperson.comJobandplacement.com Our Services Website Development Android Development Website Designing Digital Marketing Summer Training Industrial Training College Campus Training Contact Address: G-13, 2nd Floor, Sec-3 Noida, UP, 201301, India Contact No: 0120-4256464, 9990449935Contact Us Subscribe Us Privacy PolicySitemap About Me © Copyright 2011-2021 www.javatpoint.com. All rights reserved. Developed by JavaTpoint.
